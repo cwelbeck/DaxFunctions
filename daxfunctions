@@ -1,0 +1,135 @@
+DAX Queries Functions
+
+=if(ServicingStripDetails[Originator]="Abe Spira" 
+|| ServicingStripDetails[Originator]="Brian Liske" 
+|| ServicingStripDetails[Originator]="Clint Darby" 
+|| ServicingStripDetails[Originator]="Dale Holzer" 
+|| ServicingStripDetails[Originator]="Richard Kourbage" 
+|| ServicingStripDetails[Originator]="Scott Chisholm" 
+|| ServicingStripDetails[Originator]="Tim Thompson" 
+|| ServicingStripDetails[Originator]="Tony Spaeth"
+|| ServicingStripDetails[Originator]="Cary Tremper" && ServicingStripDetails[ClosedSrvYear]>2014
+|| ServicingStripDetails[Originator]="Donny Rosenberg" && ServicingStripDetails[ClosedSrvYear]>2014
+|| ServicingStripDetails[Originator]="Rob Russell" && ServicingStripDetails[ClosedSrvYear]>2014
+|| ServicingStripDetails[Originator]="Cary Tremper" && ServicingStripDetails[ClosedSrvYear]>2014
+|| ServicingStripDetails[Originator]="Daniel Sacks" && ServicingStripDetails[ClosedSrvYear]>2016
+|| ServicingStripDetails[Originator]="Fred Levine" && ServicingStripDetails[ClosedSrvYear]>2017, ServicingStripDetails[TotalRMSrvStrip],0)
+
+
+=if(ServicingStripDetails[Originator]="Abe Spira" 
+|| ServicingStripDetails[Originator]="Brian Liske" 
+|| ServicingStripDetails[Originator]="Clint Darby" 
+|| ServicingStripDetails[Originator]="Dale Holzer" 
+|| ServicingStripDetails[Originator]="Richard Kourbage" 
+|| ServicingStripDetails[Originator]="Scott Chisholm" 
+|| ServicingStripDetails[Originator]="Tim Thompson" 
+|| ServicingStripDetails[Originator]="Tony Spaeth"
+|| ServicingStripDetails[Originator]="Cary Tremper" && ServicingStripDetails[ClosedSrvYear]>2014
+|| ServicingStripDetails[Originator]="Donny Rosenberg" && ServicingStripDetails[ClosedSrvYear]>2014
+|| ServicingStripDetails[Originator]="Rob Russell" && ServicingStripDetails[ClosedSrvYear]>2014
+|| ServicingStripDetails[Originator]="Cary Tremper" && ServicingStripDetails[ClosedSrvYear]>2014
+|| ServicingStripDetails[Originator]="Daniel Sacks" && ServicingStripDetails[ClosedSrvYear]>2017
+|| ServicingStripDetails[Originator]="Fred Levine" && ServicingStripDetails[ClosedSrvYear]>2018, ServicingStripDetails[TotalRMSrvStrip],0)
+
+
+=SWITCH(ServicingStripDetails[YearOfSeasoning], 
+					 "Year 1", RELATED(RelationshipManagerStrips2[Year_1]), 
+					 "Year 2", RELATED(RelationshipManagerStrips2[Year_2]), 
+					 "Year 3", RELATED(RelationshipManagerStrips2[Year_3]), 
+					 "Year 4", RELATED(RelationshipManagerStrips2[Year_4]), 
+					 "Year 5", RELATED(RelationshipManagerStrips2[Year_5]))
+           
+
+
+=SWITCH(ServicingStripDetails[YearOfSeasoning], 
+					 "1", RELATED(RelationshipManagerStrips2[Year_1]), 
+					 "2", RELATED(RelationshipManagerStrips2[Year_2]), 
+					 "3", RELATED(RelationshipManagerStrips2[Year_3]), 
+					 "4", RELATED(RelationshipManagerStrips2[Year_4]), 
+					 "5", RELATED(RelationshipManagerStrips2[Year_5]))
+           
+           
+           
+=SWITCH(ServicingStripDetails[YearsOfSeasoningInt], 
+        1, "Year 1", 
+		2, "Year 2", 
+		3, "Year 3", 
+		4, "Year 4", 
+		5, "Year 5", "Other")
+    
+    
+    
+
+
+=if(ServicingStripDetails[Originator]="Abe Spira" && ServicingStripDetails[YearsOfSeasoningInt]<6
+|| ServicingStripDetails[Originator]="Brian Liske" && ServicingStripDetails[YearsOfSeasoningInt]<6
+|| ServicingStripDetails[Originator]="Clint Darby" && ServicingStripDetails[YearsOfSeasoningInt]<6
+|| ServicingStripDetails[Originator]="Dale Holzer" && ServicingStripDetails[YearsOfSeasoningInt]<6
+|| ServicingStripDetails[Originator]="Richard Kourbage" && ServicingStripDetails[YearsOfSeasoningInt]<6
+|| ServicingStripDetails[Originator]="Scott Chisholm" && ServicingStripDetails[YearsOfSeasoningInt]<6
+|| ServicingStripDetails[Originator]="Tim Thompson" && ServicingStripDetails[YearsOfSeasoningInt]<6
+|| ServicingStripDetails[Originator]="Tony Spaeth" && ServicingStripDetails[YearsOfSeasoningInt]<6
+|| ServicingStripDetails[Originator]="Cary Tremper" && ServicingStripDetails[ClosedSrvYear]>2014
+|| ServicingStripDetails[Originator]="Donny Rosenberg" && ServicingStripDetails[ClosedSrvYear]>2014
+|| ServicingStripDetails[Originator]="Rob Russell" && ServicingStripDetails[ClosedSrvYear]>2014
+|| ServicingStripDetails[Originator]="Cary Tremper" && ServicingStripDetails[ClosedSrvYear]>2014
+|| ServicingStripDetails[Originator]="Daniel Sacks" && ServicingStripDetails[ClosedSrvYear]>2017
+|| ServicingStripDetails[Originator]="Fred Levine" && ServicingStripDetails[ClosedSrvYear]>2018, ServicingStripDetails[TotalRMSrvStrip],0)
+
+
+
+TOTALYTD
+
+=TOTALYTD(SUM(Loan[Amount]),'Closed_Date'[Date])
+
+
+IsCurrentMonth
+=IF (
+        YEAR ( Closed_Date[Date] ) = YEAR ( TODAY () )
+            && MONTH ( Closed_Date[Date] ) = MONTH ( TODAY () ),
+        "Yes",
+        "No"
+    )
+
+
+
+IsNextMonth
+=IF (
+        YEAR ( Closed_Date[Date] ) = YEAR ( TODAY () )
+            && MONTH ( Closed_Date[Date] ) = MONTH ( TODAY () ) + 1,
+        "Yes",
+        "No"
+    )
+
+
+=IF(Loan[IsCurrentMonth]="Yes" , Loan[Amount])
+
+
+
+Display Last N Months & Selected Month using Single Date Dimension in Power BI
+
+http://sqljason.com/2018/03/display-last-n-months-selected-month-using-single-date-dimension-in-power-bi.html
+
+
+
+Power BI Time Intelligence: Next Month and Previous Month
+
+https://www.youtube.com/watch?v=fKjQLR1ELw4
+
+https://powerbi.microsoft.com/en-us/blog/object-level-security-ols-is-now-generally-available-in-power-bi-premium-and-pro/
+
+
+Row Level Security
+Dynamic Row Level Security with Organizational Hierarchy Power BI - RADACAD
+
+
+Object Level Security
+https://powerbi.microsoft.com/en-us/blog/object-level-security-ols-now-available-for-public-preview-in-power-bi-premium/
+
+
+
+
+
+
+    
+

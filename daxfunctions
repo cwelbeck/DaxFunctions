@@ -128,6 +128,569 @@ https://powerbi.microsoft.com/en-us/blog/object-level-security-ols-now-available
 
 
 
+Calendar = CalendarAuto()
+
+HighMediumLow = 
+SWITCH(TRUE),
+    'Sales Territory'[Total Transactions] >= 7000, "High Volume",
+	'Sales Territory'[Total Transactions] >= 4000, "Medium Volume",
+	'Sales Territory'[Total Transactions] >= 1, "Low Volume",
+	"NA" )
+	
+	
+	
+SourceNameOrdered = 
+SWITCH(TRUE),
+    'Sales Territory'[Total Transactions] >= 7000, "High Volume",
+	'Sales Territory'[Total Transactions] >= 4000, "Medium Volume",
+	'Sales Territory'[Total Transactions] >= 1, "Low Volume",
+	"NA" )
+	
+	
+SourceNameOrdered =
+SWITCH(Loan[Source Conformed 2], 
+					 "FHA / HUD", 1,
+					 "Fannie Mae", 2,
+					 "Freddie Mac", 3,
+					 "Bridge", 4,
+					 "CMBS", 5,
+					 "Assumption", 6,
+					 "Equity", 7,
+					 "Commercial Loan Group", 8,
+					 "Other", 9)
+					 
+					 
+SourceConfirmedLineChart =
+SWITCH(Loan[Source Confirmed 2], 
+					 "FHA / HUD", "FHA / HUD",
+					 "Fannie Mae", "Fannie Mae",
+					 "Freddie Mac", "Freddie Mac",
+					 "Bridge", "Bridge",
+					 "CMBS", "CMBS",
+					 "Assumption", "Assumption",
+					 "Equity", "Equity",
+					 "Commercial Loan Group", "Commercial Loan Group",
+					 "Other", "Other")
+					 
+					 
+					 
+TOTALYTD
+
+=TOTALYTD(SUM(Loan[Amount]),'Closed_Date'[Date])
+
+TOTALYTD(<expression>,<dates>[,<filter>][,<year_end_date>])  
+
+
+= TOTALYTD(SUM(InternetSales_USD[SalesAmount_USD]),DateTime[DateKey], ALL('DateTime'), "6/30")  
+
+
+= TOTALYTD(SUM(InternetSales_USD[SalesAmount_USD]),DateTime[DateKey])  
+
+
+= TOTALYTD(SUM(Loan(Amount),DateTime[DateKey], ALL('DateTime), "12/31")
+
+
+= CALCULATE(SUM(Loan[Amount],DATESYTD(Closed_Date[DateKey]))
+
+SUM(Loan[Amount],DATESYTD(Closed_Date[Date], "12/31"))
+
+
+
+AVI Singh
+
+Sales Calendar YTD = CALCULATE([Sales], DATESYTD('Calendar'[Date]))
+
+Sales Fiscal YTD = CALCULATE([Sales], DATESYTD('Calendar'[Date],"06/30"))
+
+
+MARGIN =DIVIDE(NavisionLoanFinancialDetails[Net Greystone Profit Amount], RELATED(Loan[Amount]))
+
+=DIVIDE(LoanProfitability[GrossProfit], RELATED(Loan[Amount]))
+
+
+
+current_month_sales = CALCULATE(SUM('Table1'[Sales]),FILTER('Table1',MONTH('Table1'[Month])=MONTH(TODAY())))
+
+last_month_sales = var current_month= MONTH(TODAY()) return  CALCULATE(SUM('Table1'[Sales]),FILTER('Table1',MONTH('Table1'[Month])=current_month -1))
+
+last before_month_sales = var current_month= MONTH(TODAY()) return  CALCULATE(SUM('Table1'[Sales]),FILTER('Table1',MONTH('Table1'[Month])=current_month -2))
+
+
+
+IsCurrentMonth
+=IF (
+        YEAR ( Closed_Date[Date] ) = YEAR ( TODAY () )
+            && MONTH ( Closed_Date[Date] ) = MONTH ( TODAY () ),
+        "Yes",
+        "No"
+    )
+    
+    
+    
+
+IsNextMonth
+=IF (
+        YEAR ( Closed_Date[Date] ) = YEAR ( TODAY () )
+            && MONTH ( Closed_Date[Date] ) = MONTH ( TODAY () ) + 1,
+        "Yes",
+        "No"
+    )
+    
+    
+    
+    
+    =SWITCH(Loan[LoanStatus], 
+					 "In Closing", 1), 
+					 "Closing", 2), 
+					 "In Underwriting", 3), 
+					 "Year 4", RELATED(RelationshipManagerStrips2[Year_4]), 
+					 "Year 5", RELATED(RelationshipManagerStrips2[Year_5]))
+					 
+					 
+					 
+=SWITCH(Loan[MonthNameActual], 
+					 "January", "1January",
+					 "February", "2February",
+					 "March", "3March",
+					 "April", "4April",
+					 "May", "5May",
+					 "June", "6June",
+					 "July", "7July",
+					 "August", "8August",
+					 "September", "9September",
+					 "October", "10October",
+					 "November", "11November",
+					 "December", "12December")
+					 
+
+=SWITCH(Loan[MonthNameActual], 
+					 "January", "01January",
+					 "February", "02February",
+					 "March", "03March",
+					 "April", "04April",
+					 "May", "05May",
+					 "June", "06June",
+					 "July", "07July",
+					 "August", "08August",
+					 "September", "09September",
+					 "October", "10October",
+					 "November", "11November",
+					 "December", "12December")
+					 
+					 
+=SWITCH(Loan[MonthNameActual], 
+					 "January", "01",
+					 "February", "02",
+					 "March", "03",
+					 "April", "04",
+					 "May", "05",
+					 "June", "06",
+					 "July", "07",
+					 "August", "08",
+					 "September", "09",
+					 "October", "10",
+					 "November", "11",
+					 "December", "12")
+					 
+=SWITCH(Loan[MonthNameActual], 
+					 "January", 1,
+					 "February", 2,
+					 "March", 3,
+					 "April", 4,
+					 "May", 5,
+					 "June", 6,
+					 "July", 7,
+					 "August", 8,
+					 "September", 9,
+					 "October", 10,
+					 "November", 11,
+					 "December", 12)
+					 
+					 
+=SWITCH(Loan[MonthNameActual], 
+					 "January", "January",
+					 "February", "February",
+					 "March", "March",
+					 "April", "April",
+					 "May", "May",
+					 "June", "June",
+					 "July", "July",
+					 "August", "August",
+					 "September", "September",
+					 "October", "October",
+					 "November", "November",
+					 "December", "December")
+
+
+
+=IF(Loan[LifeCycleCategory]="Closed", Loan[ClosedDateYear],Loan[ClosingDateYear])
+
+
+
+
+
+
+=IF(Loan[LifeCycleCategory]="Closed", Loan[ClosedDateMonthName],Loan[ClosingDateMonthName])
+
+
+
+=SWITCH(Loan[MonthNameActual], 
+					 "January", 1,
+					 "February", 2,
+					 "March", 3,
+					 "April", 4,
+					 "May", 5,
+					 "June", 6,
+					 "July", 7,
+					 "August", 8,
+					 "September", 9,
+					 "October", 10,
+					 "November", 11,
+					 "December", 12,
+					 "", 13)
+					 
+					 
+					
+=if(Loan[LoanStatusActual]="In Closing" && Loan[ClosedDateMonthName]="", "Date Not Set", Loan[MonthNameSorted])
+
+
+ClosedDateMonthName
+
+
+=if(Loan[LoanStatusActual]="In Closing" && NOT(ISBLANK(Loan[ClosedDateMonthName])),
+    SWITCH(Loan[ClosedDateMonthName], 
+					 "January", 1,
+					 "February", 2,
+					 "March", 3,
+					 "April", 4,
+					 "May", 5,
+					 "June", 6,
+					 "July", 7,
+					 "August", 8,
+					 "September", 9,
+					 "October", 10,
+					 "November", 11,
+					 "December", 12,
+					 13
+					 ),
+					 Loan[MonthNumber2]
+		   )
+					 
+
+=SWITCH(Loan[MonthSortingColumnUseOnly], 
+					 "January", "January",
+					 "February", "February",
+					 "March", "March",
+					 "April", "April",
+					 "May", "May",
+					 "June", "June",
+					 "July", "July",
+					 "August", "August",
+					 "September", "September",
+					 "October", "October",
+					 "November", "November",
+					 "December", "December", "Date Not Set")
+
+UseToSortMonthNameSorted2
+					 
+=if(Loan[LoanStatusActual]="In Closing" && ISBLANK(Loan[ClosedDateMonthName]), 13, Loan[MonthNumber])
+
+
+
+=if(Loan[LoanStatusActual]="In Closing" && ISBLANK(Loan[ClosedDateMonthName]) && Loan[IsCurrentMonth]="Yes", 13, Loan[MonthNumber])
+
+
+
+=IF (
+        YEAR ( Closed_Date[Date] ) = YEAR ( TODAY () )
+            && MONTH ( Closed_Date[Date] ) = MONTH ( TODAY () ),
+        "Yes",
+        "No"
+    )
+
+
+					 
+MonthNameActual					 
+=IF(Loan[LifeCycleCategory]="Closed", Loan[ClosedDateMonthName],IF(Loan[LoanStatusActual]="In Closing" && ISBLANK(Loan[ClosedDateMonth]), "Date Not Set", Loan[ClosingDateMonthName]))
+
+
+=SWITCH(Loan[MonthNameActual2], 
+					 "January", 1,
+					 "February", 2,
+					 "March", 3,
+					 "April", 4,
+					 "May", 5,
+					 "June", 6,
+					 "July", 7,
+					 "August", 8,
+					 "September", 9,
+					 "October", 10,
+					 "November", 11,
+					 "December", 12,
+					 "Date Not Set", 13)
+					 
+					 
+=SWITCH(Loan[MonthNameActual2], 
+					 "January", "January",
+					 "February", "February",
+					 "March", "March",
+					 "April", "April",
+					 "May", "May",
+					 "June", "June",
+					 "July", "July",
+					 "August", "August",
+					 "September", "September",
+					 "October", "October",
+					 "November", "November",
+					 "December", "December",
+					 "Date Not Set", "Date Not Set")
+					 
+					 
+=IF(Loan[LifeCycleCategory]="Closed", Loan[ClosedDateMonthName],IF(Loan[LoanStatusActual]="In Closing" && ISBLANK(Loan[ClosedDateMonthName]) && Loan[IsCurrentMonth]="Yes", "Date Not Set", Loan[ClosingDateMonthName]))
+
+
+=IF (
+        YEAR ( Closed_Date[Date] ) = YEAR ( TODAY () )
+            && MONTH ( Closed_Date[Date] ) = MONTH ( TODAY () ),
+        "Yes",
+        "No"
+    )
+	
+
+= CALCULATE(SUM(InternetSales_USD[SalesAmount_USD]), PREVIOUSMONTH('DateTime'[DateKey]))  
+
+
+PreviousMonthInClosing
+
+=if(PREVIOUSMONTH('Loan'[ClosingDateMonthName])) = "Yes" && Loan[IsCurrentMonth]="Yes" && (Loan[LoanStatusActual]="In Closing" && ISBLANK(Loan[ClosedDateMonthName]), "Date Not Set")
+
+
+=IF(PREVIOUSMONTH(Loan[ClosingDateMonthName]),"Yes","No")
+
+
+=RELATED(Closing_Date[DateKey])
+
+
+=IF(PREVIOUSMONTH(Closing_Date[DateKey])), "Yes", "No")
+
+
+=IF(PREVIOUSMONTH(Closing_Date[Date]), "Yes", "No")
+
+Days between = DATEDIFF([Transactiondate],[Closed],DAY)
+
+
+=if(PREVIOUSMONTH('Loan'[ClosingDateMonthName])) = "Yes" && Loan[IsCurrentMonth]="Yes" && (Loan[LoanStatusActual]="In Closing" && ISBLANK(Loan[ClosedDateMonthName]), "Date Not Set")
+
+=if(ISBLANK(Loan[ClosedDate]) && NOT(ISBLANK(Loan[ClosingDate])) && Loan[IsCurrentMonth]="Yes" 
+
+
+=if(Loan[IsCurrentMonth]="No" && ISBLANK(Loan[ClosedDate] && Loan[LoanStatusActual]="In Closing"
+
+
+select * from [Stage_SalesForce].[loan_origination].[vw_Profitability] 
+union all
+select * from [Stage_Closer].[closer].[vw_LoanProfitability]
+where loanid = '0063m00000jUdzFAAS'
+
+
+/****** Script for SelectTopNRows command from SSMS  ******/
+SELECT *
+  FROM [Stage_SalesForce].[loan_origination].[vw_LoanDetail]
+  where loanid = '015030'
+
+
+  /****** Script for SelectTopNRows command from SSMS  ******/
+SELECT TOP 1000 *
+  FROM [Stage_SalesForce].[loan_origination].[vw_LoanDetail]
+  --where loanid = '015030'
+
+
+SELECT *
+  FROM [Stage_SalesForce].[loan_origination].[vw_Profitability]
+  --where loanid = '015030'
+  
+   
+=IF(Loan[IsCurrentMonth]="Yes" && IF(Loan[LifeCycleCategory]="Closed", Loan[ClosedDateMonthName],
+ IF(Loan[IsCurrentMonth]="Yes" && IF(Loan[LoanCycleStatus]="In Closing", Loan[ClosingDateMonthName],
+ IF(Loan[LifeCycleCategory]="Closed", Loan[ClosedDateMonthName],Loan[ClosingDateMonthName]))
+
+
+=IF(Loan[IsCurrentMonth]="Yes" && Loan[LifeCycleCategory]="Closed", Loan[ClosedDateMonthName],
+ IF(Loan[IsCurrentMonth]="Yes" && Loan[LifeCycleCategory]="Closed" && ISBLANK(Loan[ClosedDateMonthName]), "Date Not Set",
+ IF(Loan[IsCurrentMonth]="Yes" && Loan[LifeCycleStatus]="In Closing", Loan[ClosingDateMonthName], 
+ IF(Loan[LifeCycleCategory]="Closed", Loan[ClosedDateMonthName], Loan[ClosingDateMonthName])))
+
+
+=SWITCH(Loan[MonthNameActual10], 
+					 "January", 1,
+					 "February", 2,
+					 "March", 3,
+					 "April", 4,
+					 "May", 5,
+					 "June", 6,
+					 "July", 7,
+					 "August", 8,
+					 "September", 9,
+					 "October", 10,
+					 "November", 11,
+					 "December", 12,
+					 "Date Not Set",13, 14)
+
+
+=SWITCH(Loan[MonthNameActual10], 
+					 "January", "January",
+					 "February", "February",
+					 "March", "March",
+					 "April", "April",
+					 "May", "May",
+					 "June", "June",
+					 "July", "July",
+					 "August", "August",
+					 "September", "September",
+					 "October", "October",
+					 "November", "November",
+					 "December", "December", "Date Not Set")
+					 
+					 
+UsedToSortMonthNameSorted5
+=SWITCH(Loan[MonthNameActual4], 
+					 "January", 1,
+					 "February", 2,
+					 "March", 3,
+					 "April", 4,
+					 "May", 5,
+					 "June", 6,
+					 "July", 7,
+					 "August", 8,
+					 "September", 9,
+					 "October", 10,
+					 "November", 11,
+					 "December", 12,13)
+					 					 
+					 
+MonthNameSorted5
+=SWITCH(Loan[MonthNameActual4], 
+					 "January", "January",
+					 "February", "February",
+					 "March", "March",
+					 "April", "April",
+					 "May", "May",
+					 "June", "June",
+					 "July", "July",
+					 "August", "August",
+					 "September", "September",
+					 "October", "October",
+					 "November", "November",
+					 "December", "December", "Date Not Set")
+					 
+					 					 
+Calculated Column 4
+=SWITCH(Loan[MonthNameSorted3], 
+					 "January", 1,
+					 "February", 2,
+					 "March", 3,
+					 "April", 4,
+					 "May", 5,
+					 "June", 6,
+					 "July", 7,
+					 "August", 8,
+					 "September", 9,
+					 "October", 10,
+					 "November", 11,
+					 "December", 12,
+					 "Date Not Set", 13)
+					 
+					 					 
+MonthNameActual4
+=IF(Loan[LifeCycleCategory]="Closed", Loan[ClosedDateMonthName],
+ IF(Loan[LoanStatusActual]="In Closing" && ISBLANK(Loan[ClosedDateMonthName]), "Date Not Set",  Loan[ClosingDateMonthName]))
+ 
+ 
+***** Previous Month From Today
+Measure = DATE(YEAR(TODAY()),MONTH(TODAY())-1,DAY(TODAY()))
+
+
+=IF (
+        YEAR ( Closed_Date[Date] ) = YEAR ( TODAY () )
+            && MONTH ( Closed_Date[Date] ) = MONTH ( TODAY () ) - 1,
+        "Yes",
+        "No"
+    )
+	
+	
+=MONTH ( Closed_Date[Date] ) - 1
+
+
+=IF(Loan[LifeCycleCategory]="In Closing"  && Loan[ClosedDateMonthName]="" && MONTH(Loan[ClosingDate]) > MONTH(TODAY()), "Date Not Set", "Date Set")
+
+
+Still in Closing for March 2021
+LoanID = 0063m00000jUafNAAS
+ID = 0063m00000jUafNAAS
+
+
+=IF(Loan[IsCurrentMonth]="Yes" && Loan[LifeCycleCategory]="Closed", Loan[ClosedDateMonthName],
+ IF(Loan[IsCurrentMonth]="Yes" && Loan[LifeCycleCategory]="Closed" && ISBLANK(Loan[ClosedDateMonthName]), "Date Not Set",
+ IF(Loan[IsCurrentMonth]="Yes" && Loan[LifeCycleStatus]="In Closing", Loan[ClosingDateMonthName], 
+ IF(Loan[LifeCycleCategory]="Closed", Loan[ClosedDateMonthName], Loan[ClosingDateMonthName]))))
+ 
+
+&& Loan[ClosedDateMonthName]=""
+
+
+=IF(Loan[LifeCycleCategory]="In Closing" && MONTH(TODAY()) -1, "Date Not Set", "Date Set")
+
+
+*IF(Loan[LifeCycleStatus]="In Closing" && MONTH(Today()) - 1 , "Date Not Set",
+ 
+ 
+ =RELATED(Closing_Date[MonthName])
+ 
+ 
+ =IF(Loan[UseToSortMonthNameSorted2]
+
+
+MonthNameSorted2 = SortedByColumn = UseToSortMonthNameSorted2
+
+=SWITCH(Loan[UseToSortMonthNameSorted2], 
+					 1, 1,
+					 2, 2,
+					 3, 3,
+					 4, 4,
+					 5, 5,
+					 6, 6,
+					 7, 7,
+					 8, 8,
+					 9, 9,
+					 10, 10,
+					 11, 11,
+					 12, 12,
+					 13, 13)
+					 
+					 
+
+=SWITCH(Loan[MonthNameSorted3], 
+					  1, "January",
+					  2, "February",
+					  3, "March", 
+					  4, "April", 
+					  5, "May", 
+					  6, "June", 
+					  7, "July", 
+					  8, "August",
+					  9, "September", 
+					  10, "October", 
+					  11, "November", 
+					  12, "December", 
+					  13, "Date Not Set")	 
+
+
+
+
+
+
+
+
 
 
 
